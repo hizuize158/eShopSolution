@@ -6,15 +6,13 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Linq;
-using eShopSolution.ViewModels.Catalogs.Products.Manage;
-using eShopSolution.ViewModels.Catalogs.Products.Dtos;
 using eShopSolution.ViewModels.Common;
-using eShopSolution.ViewModels.Catalogs.Products.Dtos.Manage;
 using Microsoft.AspNetCore.Http;
 using System.Net.Http.Headers;
 using System.IO;
 using eShopSolution.Application.Common;
 using eShopSolution.ViewModels.Catalog.Products;
+using eShopSolution.ViewModels.Catalogs.Products;
 
 namespace eShopSolution.Application.Catalogs.Products
 {
@@ -98,7 +96,7 @@ namespace eShopSolution.Application.Catalogs.Products
             return await _context.SaveChangesAsync();
         }
 
-        public async Task<PagedResult<ProductViewModel>> GetAllPaging(GetProductPagingRequest request)
+        public async Task<PagedResult<ProductViewModel>> GetAllPaging(GetManageProductPagingRequest request)
         {
             //1. Select join
             var query = from p in _context.Products
@@ -208,5 +206,6 @@ namespace eShopSolution.Application.Catalogs.Products
             await _storageService.SaveFileAsync(file.OpenReadStream(), fileName);
             return fileName;
         }
+
     }
 }
