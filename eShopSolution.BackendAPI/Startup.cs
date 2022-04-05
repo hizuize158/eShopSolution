@@ -1,10 +1,13 @@
 using eShopSolution.Application.Catalogs.Products;
 using eShopSolution.Application.Common;
+using eShopSolution.Application.System.Users;
 using eShopSolution.BackendAPI.Constants;
 using eShopSolution.Data.EF;
+using eShopSolution.Data.Entities;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -31,9 +34,17 @@ namespace eShopSolution.BackendAPI
         {
             services.AddDbContext<EShopDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString(SystemConstants.MainConnectionString)));
-            services.AddTransient<IStorageService , FileStorageService>();
+            services.AddIdentity<AppUser, AppRole>()
+                .AddEntityFrameworkStores<EShopDbContext>()
+                .AddDefaultTokenProviders();
+            services.AddTransient<IStorageService, FileStorageService>();
             services.AddTransient<IPublicProductService, PublicProductService>();
             services.AddTransient<IManageProductService, ManageProductService>();
+            services.AddTransient<UserManager<AppUser>, UserManager<AppUser>>();
+            services.AddTransient<SignInManager<AppUser>, SignInManager<AppUser>>();
+            services.AddTransient<RoleManager<AppRole>, RoleManager<AppRole>>();
+            services.AddTransient<IUserService, UserService>();
+
             services.AddControllersWithViews();
             // add swaggergen
             services.AddSwaggerGen(c =>
