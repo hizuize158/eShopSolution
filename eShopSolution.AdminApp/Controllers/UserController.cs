@@ -2,6 +2,7 @@
 using eShopSolution.ViewModels.System.Users;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Logging;
@@ -16,7 +17,6 @@ using System.Threading.Tasks;
 
 namespace eShopSolution.AdminApp.Controllers
 {
-
 
     public class UserController : Controller
     {
