@@ -109,7 +109,9 @@ namespace eShopSolution.Application.System.Users
             //4. Select and projection
             var pagedResult = new PagedResult<UserVM>()
             {
-                TotalRecord = totalRow,
+                TotalRecords = totalRow,
+                PageIndex = request.PageIndex,
+                PageSize = request.PageSize,
                 Items = data
             };
             return new ApiSuccessResult<PagedResult<UserVM>>(pagedResult);

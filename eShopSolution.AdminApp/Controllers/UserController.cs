@@ -29,7 +29,7 @@ namespace eShopSolution.AdminApp.Controllers
             _userApiClient = userApiClient;
             _configuration = configuration;
         }
-        public async Task<IActionResult> Index(string keyword, int pageIndex=1, int pageSize=10)
+        public async Task<IActionResult> Index(string keyword, int pageIndex=1, int pageSize=2)
         {
             var request = new GetUserPagingRequest()
             {
@@ -46,6 +46,14 @@ namespace eShopSolution.AdminApp.Controllers
         {
             return View();
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Details(Guid id)
+        {
+            var result = await _userApiClient.GetById(id); 
+            return View(result.ResultObj);
+        }
+
 
         [HttpPost]
         public async Task<IActionResult> Create(RegisterRequest request)
@@ -128,27 +136,6 @@ namespace eShopSolution.AdminApp.Controllers
         }
 
 
-        /*[HttpGet]
-        public async Task<IActionResult> Update(Guid id)
-        {
-            var user = await _userApiClient.GetById(id);
-            return View(user);
-        }
-
-
-        [HttpPost]
-        public async Task<IActionResult> Update(UserUpdateRequest request) 
-        {
-            if (!ModelState.IsValid)
-                return View();
-
-            var result = await _userApiClient.UpdateUser(request.Id, request);
-            if (result.IsSuccessed)
-                return RedirectToAction("Index");
-
-            ModelState.AddModelError("", result.Message);
-            return View(request);
-        }*/
 
         [HttpPost]
         public async Task<IActionResult> Logout()
