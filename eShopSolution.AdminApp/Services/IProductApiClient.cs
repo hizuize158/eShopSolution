@@ -1,4 +1,5 @@
 ﻿using eShopSolution.ViewModels.Catalog.Products;
+using eShopSolution.ViewModels.Catalogs.Products;
 using eShopSolution.ViewModels.Common;
 using System;
 using System.Collections.Generic;
@@ -10,5 +11,6 @@ namespace eShopSolution.AdminApp.Services
     public interface IProductApiClient
     {
         Task<PagedResult<ProductVm>> GetPagings(GetManageProductPagingRequest request);
+        Task<bool> CreateProduct(ProductCreateRequest request);
     }
 }
