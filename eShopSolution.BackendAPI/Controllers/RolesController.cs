@@ -14,10 +14,10 @@ namespace eShopSolution.BackendAPI.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize] 
-    public class RoleController : ControllerBase
+    public class RolesController : ControllerBase
     {
         private readonly IRoleService _roleService;
-        public RoleController(IRoleService roleService)
+        public RolesController(IRoleService roleService)
         {
             _roleService = roleService;
         }

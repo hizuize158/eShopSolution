@@ -24,13 +24,13 @@ namespace eShopSolution.AdminApp.Controllers
     {
         private readonly IUserApiClient _userApiClient;
         private readonly IConfiguration _configuration;
-        private readonly IRoleClientApi _roleClientApi;
+        private readonly IRoleApiClient _roleApiClient;
 
-        public UserController(IRoleClientApi roleClientApi, IUserApiClient userApiClient, IConfiguration configuration)
+        public UserController(IRoleApiClient roleApiClient, IUserApiClient userApiClient, IConfiguration configuration)
         {
             _userApiClient = userApiClient;
             _configuration = configuration;
-            _roleClientApi = roleClientApi;
+            _roleApiClient = roleApiClient;
         }
         public async Task<IActionResult> Index(string keyword, int pageIndex=1, int pageSize=2)
         {
@@ -243,7 +243,7 @@ namespace eShopSolution.AdminApp.Controllers
         private async Task<RoleAssignRequest> GetRoleAssignRequest(Guid id)
         {
             var userObj = await _userApiClient.GetById(id);
-            var roleObj = await _roleClientApi.GetAll();
+            var roleObj = await _roleApiClient.GetAll();
             var roleAssignRequest = new RoleAssignRequest();
             foreach (var role in roleObj.ResultObj)
             {
