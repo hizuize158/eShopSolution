@@ -1,3 +1,4 @@
+using eShopSolution.Application.Catalogs.Categories;
 using eShopSolution.Application.Catalogs.Products;
 using eShopSolution.Application.Common;
 using eShopSolution.Application.System.Roles;
@@ -41,11 +42,13 @@ namespace eShopSolution.BackendAPI
                 .AddDefaultTokenProviders();
             services.AddTransient<IStorageService, FileStorageService>();
             services.AddTransient<IProductService, ProductService>();
+            services.AddTransient<ICategoryService, CategoryService>();
             services.AddTransient<UserManager<AppUser>, UserManager<AppUser>>();
             services.AddTransient<SignInManager<AppUser>, SignInManager<AppUser>>();
             services.AddTransient<RoleManager<AppRole>, RoleManager<AppRole>>();
             services.AddTransient<IUserService, UserService>();
-            services.AddTransient<IRoleService, RoleService>();
+            services.AddTransient<IRoleService, RoleService>();  
+            
 
             services.AddTransient<IValidator<LoginRequest>, LoginRequestValidator>();
             services.AddTransient<IValidator<RegisterRequest>, RegisterRequestValidator>();
